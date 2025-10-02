@@ -38,9 +38,9 @@ float pid_position(pid_type_def *pid, float ref, float set)
     pid->Dbuf[1] = pid->Dbuf[0];
     pid->Dbuf[0] = (pid->error[0] - pid->error[1]);
     pid->Dout = pid->Kd * pid->Dbuf[0];
-    CLAMP(pid->Iout, pid->max_iout);
+    CLAMP_ABS(pid->Iout, pid->max_iout);
     pid->out = pid->Pout + pid->Iout + pid->Dout;
-    CLAMP(pid->out, pid->max_out);
+    CLAMP_ABS(pid->out, pid->max_out);
     return pid->out;
 }
 
@@ -62,8 +62,8 @@ float pid_delta(pid_type_def *pid, float ref, float set)
     pid->Dbuf[0] = (pid->error[0] - 2.0f * pid->error[1] + pid->error[2]);
     pid->Dout = pid->Kd * pid->Dbuf[0];
     pid->out += pid->Pout + pid->Iout + pid->Dout;
-    CLAMP(pid->out, pid->max_out);
-    // CLAMP(pid->Iout, pid->max_iout);
+    CLAMP_ABS(pid->out, pid->max_out);
+    // CLAMP_ABS(pid->Iout, pid->max_iout);
     return pid->out;
 }
 

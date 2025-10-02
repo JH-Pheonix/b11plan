@@ -2,7 +2,8 @@
 #define _SYSTEM_INIT_H_
 
 #include "imu.h"
-#include "motor_dir.h"
+#include "motor.h"
+#include "servo.h"
 #include "key.h"
 #include "lcd.h"
 #include "attitude.h"
@@ -11,8 +12,9 @@
 
 void system_init(void);
 
-extern motor_dir_obj_t motor_left;
-extern motor_dir_obj_t motor_right;
+extern motor_obj_t motor_left;
+extern motor_obj_t motor_right;
+extern servo_obj_t motor_servo;
 
 extern encoder_obj_t encoder_left;
 extern encoder_obj_t encoder_right;

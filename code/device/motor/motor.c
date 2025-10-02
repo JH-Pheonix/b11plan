@@ -1,9 +1,9 @@
-#include "motor_dir.h"
+#include "motor.h"
 #include "common.h"
 
-motor_dir_obj_t motor_dir_init(pwm_channel_enum pwm_pin, gpio_pin_enum dir_pin, vuint32 freq, vuint32 deadzone, vint8 dir)
+motor_obj_t motor_init(pwm_channel_enum pwm_pin, gpio_pin_enum dir_pin, vuint32 freq, vuint32 deadzone, vint8 dir)
 {
-    motor_dir_obj_t motor;
+    motor_obj_t motor;
 
     motor.pwm_pin = pwm_pin;
     motor.dir_pin = dir_pin;
@@ -17,7 +17,7 @@ motor_dir_obj_t motor_dir_init(pwm_channel_enum pwm_pin, gpio_pin_enum dir_pin, 
     return motor;
 }
 
-void motor_dir_set_pwm(motor_dir_obj_t *motor, vint32 duty)
+void motor_set_pwm(motor_obj_t *motor, vint32 duty)
 {
     duty *= motor->dir;
     if (motor->status == 0) // 未初始化
@@ -29,7 +29,7 @@ void motor_dir_set_pwm(motor_dir_obj_t *motor, vint32 duty)
         duty += (duty > 0) ? motor->deadzone : -motor->deadzone;
     }
 
-    CLAMP(duty, 9999);
+    CLAMP_ABS(duty, 9999);
 
     if (duty >= 0)
     {

@@ -59,10 +59,10 @@ int core0_main(void)
     while (TRUE)
     {
         // 此处编写需要循环执行的代码
-        // lcd_show_int(0, 0, encoder_get_data(&encoder_left), 5);
-        // lcd_show_int(0, 1, encoder_get_data(&encoder_right), 5);
-        // encoder_reset(&encoder_left);
-        // encoder_reset(&encoder_right);
+        lcd_show_int(0, 0, encoder_get_data(&encoder_left), 5);
+        lcd_show_int(0, 1, encoder_get_data(&encoder_right), 5);
+        encoder_reset(&encoder_left);
+        encoder_reset(&encoder_right);
         // if (mt9v03x_finish_flag)
         // {
         //     lcd_show_grey_image_full(mt9v03x_image, MT9V03X_W, MT9V03X_H, 0);
